@@ -1,0 +1,311 @@
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="eee73946d844daab19731e71" xml:lang="en" sap:schema-version="0000" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="eee73946d844daab19731e71_Entities" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="SalesOrderSet" EntityType="eee73946d844daab19731e71.SalesOrder" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <AssociationSet Name="SalesOrderCustomerCustomer" Association="eee73946d844daab19731e71.SalesOrderCustomerCustomer" sap:creatable="true" sap:updatable="true" sap:deletable="true">
+                    <End EntitySet="SalesOrderSet" Role="FromRole_SalesOrderCustomerCustomer"/>
+                    <End EntitySet="CustomerSet" Role="ToRole_SalesOrderCustomerCustomer"/>
+                </AssociationSet>
+                <AssociationSet Name="SalesOrderPaymentPayment" Association="eee73946d844daab19731e71.SalesOrderPaymentPayment" sap:creatable="true" sap:updatable="true" sap:deletable="true">
+                    <End EntitySet="SalesOrderSet" Role="FromRole_SalesOrderPaymentPayment"/>
+                    <End EntitySet="PaymentSet" Role="ToRole_SalesOrderPaymentPayment"/>
+                </AssociationSet>
+                <AssociationSet Name="SalesOrderShipToAddress" Association="eee73946d844daab19731e71.SalesOrderShipToAddress" sap:creatable="true" sap:updatable="true" sap:deletable="true">
+                    <End EntitySet="SalesOrderSet" Role="FromRole_SalesOrderShipToAddress"/>
+                    <End EntitySet="AddressSet" Role="ToRole_SalesOrderShipToAddress"/>
+                </AssociationSet>
+                <AssociationSet Name="SalesOrderBillToAddress" Association="eee73946d844daab19731e71.SalesOrderBillToAddress" sap:creatable="true" sap:updatable="true" sap:deletable="true">
+                    <End EntitySet="SalesOrderSet" Role="FromRole_SalesOrderBillToAddress"/>
+                    <End EntitySet="AddressSet" Role="ToRole_SalesOrderBillToAddress"/>
+                </AssociationSet>
+                <AssociationSet Name="SalesOrderSalesOrderItemSalesOrderItem" Association="eee73946d844daab19731e71.SalesOrderSalesOrderItemSalesOrderItem" sap:creatable="true" sap:updatable="true" sap:deletable="true">
+                    <End EntitySet="SalesOrderSet" Role="FromRole_SalesOrderSalesOrderItemSalesOrderItem"/>
+                    <End EntitySet="SalesOrderItemSet" Role="ToRole_SalesOrderSalesOrderItemSalesOrderItem"/>
+                </AssociationSet>
+                <EntitySet Name="CustomerSet" EntityType="eee73946d844daab19731e71.Customer" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <AssociationSet Name="CustomerSalesOrderSalesOrder" Association="eee73946d844daab19731e71.CustomerSalesOrderSalesOrder" sap:creatable="true" sap:updatable="true" sap:deletable="true">
+                    <End EntitySet="CustomerSet" Role="FromRole_CustomerSalesOrderSalesOrder"/>
+                    <End EntitySet="SalesOrderSet" Role="ToRole_CustomerSalesOrderSalesOrder"/>
+                </AssociationSet>
+                <EntitySet Name="PaymentSet" EntityType="eee73946d844daab19731e71.Payment" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="AddressSet" EntityType="eee73946d844daab19731e71.Address" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="ProductSet" EntityType="eee73946d844daab19731e71.Product" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="SalesOrderItemSet" EntityType="eee73946d844daab19731e71.SalesOrderItem" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <AssociationSet Name="SalesOrderItemProductProduct" Association="eee73946d844daab19731e71.SalesOrderItemProductProduct" sap:creatable="true" sap:updatable="true" sap:deletable="true">
+                    <End EntitySet="SalesOrderItemSet" Role="FromRole_SalesOrderItemProductProduct"/>
+                    <End EntitySet="ProductSet" Role="ToRole_SalesOrderItemProductProduct"/>
+                </AssociationSet>
+                <AssociationSet Name="SalesOrderItemSalesOrderSalesOrder" Association="eee73946d844daab19731e71.SalesOrderItemSalesOrderSalesOrder" sap:creatable="true" sap:updatable="true" sap:deletable="true">
+                    <End EntitySet="SalesOrderItemSet" Role="FromRole_SalesOrderItemSalesOrderSalesOrder"/>
+                    <End EntitySet="SalesOrderSet" Role="ToRole_SalesOrderItemSalesOrderSalesOrder"/>
+                </AssociationSet>
+                <AssociationSet Name="SalesOrderItemCustomerCustomer" Association="eee73946d844daab19731e71.SalesOrderItemCustomerCustomer" sap:creatable="true" sap:updatable="true" sap:deletable="true">
+                    <End EntitySet="SalesOrderItemSet" Role="FromRole_SalesOrderItemCustomerCustomer"/>
+                    <End EntitySet="CustomerSet" Role="ToRole_SalesOrderItemCustomerCustomer"/>
+                </AssociationSet>
+                <EntitySet Name="StatusesSet" EntityType="eee73946d844daab19731e71.Statuses" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="PaymentMethodsSet" EntityType="eee73946d844daab19731e71.PaymentMethods" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="PaymentTermsSet" EntityType="eee73946d844daab19731e71.PaymentTerms" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="MainCategoriesSet" EntityType="eee73946d844daab19731e71.MainCategories" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="QuartersSet" EntityType="eee73946d844daab19731e71.Quarters" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="ItemSalesSetSet" EntityType="eee73946d844daab19731e71.ItemSalesSet" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="Object1Set" EntityType="eee73946d844daab19731e71.Object1" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="CustomerSalesSetSet" EntityType="eee73946d844daab19731e71.CustomerSalesSet" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+            </EntityContainer>
+            <EntityType Name="SalesOrder">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="Status" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Status"/>
+                <Property Name="StatusCC" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="StatusCC"/>
+                <Property Name="Quantity" Type="Edm.Decimal" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Quantity"/>
+                <Property Name="QuantityUnit" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="QuantityUnit"/>
+                <Property Name="GrossAmount" Type="Edm.Decimal" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="GrossAmount"/>
+                <Property Name="GrossAmountCurrency" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="GrossAmountCurrency"/>
+                <Property Name="Contact" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Contact"/>
+                <Property Name="LastModification" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="LastModification"/>
+                <Property Name="LastModifier" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="LastModifier"/>
+                <Property Name="SOImage" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="SOImage"/>
+                <Property Name="ContactImg" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ContactImg"/>
+                <Property Name="___FK_71ff592b32dbe7b8107ddfd8_00047" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="___FK_71ff592b32dbe7b8107ddfd8_00047"/>
+                <Property Name="___FK_71ff592b32dbe7b8107ddfd8_00049" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="___FK_71ff592b32dbe7b8107ddfd8_00049"/>
+                <Property Name="___FK_71ff592b32dbe7b8107ddfd8_00051" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="___FK_71ff592b32dbe7b8107ddfd8_00051"/>
+                <Property Name="___FK_71ff592b32dbe7b8107ddfd8_00053" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="___FK_71ff592b32dbe7b8107ddfd8_00053"/>
+                <Property Name="___FK_71ff592b32dbe7b8107ddfd8_00057" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="___FK_71ff592b32dbe7b8107ddfd8_00057"/>
+                <Property Name="Year" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Year"/>
+                <Property Name="Month" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Month"/>
+                <Property Name="Customer1" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:calculated="{&quot;calculation&quot;:&quot;[{\&quot;label\&quot;:\&quot;PROPERTY\&quot;,\&quot;name\&quot;:\&quot;property\&quot;,\&quot;entityId\&quot;:\&quot;Customer\&quot;,\&quot;navPropId\&quot;:\&quot;Customer\&quot;,\&quot;navPropOp\&quot;:null,\&quot;propertyId\&quot;:\&quot;Name\&quot;,\&quot;type\&quot;:\&quot;property\&quot;,\&quot;propertyType\&quot;:\&quot;String\&quot;,\&quot;isNewLine\&quot;:false,\&quot;id\&quot;:1,\&quot;computedType\&quot;:\&quot;string\&quot;,\&quot;navPropName\&quot;:\&quot;Customer\&quot;,\&quot;entityName\&quot;:\&quot;Customer\&quot;,\&quot;propertyName\&quot;:\&quot;Name\&quot;}]&quot;,&quot;inputProperties&quot;:[{&quot;propertyId&quot;:&quot;Name&quot;,&quot;entityId&quot;:&quot;Customer&quot;,&quot;navPropId&quot;:&quot;Customer&quot;}]}" sap:label="Customer1"/>
+                <NavigationProperty Name="Customer" Relationship="eee73946d844daab19731e71.SalesOrderCustomerCustomer" FromRole="FromRole_SalesOrderCustomerCustomer" ToRole="ToRole_SalesOrderCustomerCustomer"/>
+                <NavigationProperty Name="Payment" Relationship="eee73946d844daab19731e71.SalesOrderPaymentPayment" FromRole="FromRole_SalesOrderPaymentPayment" ToRole="ToRole_SalesOrderPaymentPayment"/>
+                <NavigationProperty Name="ShipTo" Relationship="eee73946d844daab19731e71.SalesOrderShipToAddress" FromRole="FromRole_SalesOrderShipToAddress" ToRole="ToRole_SalesOrderShipToAddress"/>
+                <NavigationProperty Name="BillTo" Relationship="eee73946d844daab19731e71.SalesOrderBillToAddress" FromRole="FromRole_SalesOrderBillToAddress" ToRole="ToRole_SalesOrderBillToAddress"/>
+                <NavigationProperty Name="SalesOrderItem" Relationship="eee73946d844daab19731e71.SalesOrderSalesOrderItemSalesOrderItem" FromRole="FromRole_SalesOrderSalesOrderItemSalesOrderItem" ToRole="ToRole_SalesOrderSalesOrderItemSalesOrderItem"/>
+            </EntityType>
+            <Association Name="SalesOrderCustomerCustomer">
+                <End Type="eee73946d844daab19731e71.SalesOrder" Multiplicity="1" Role="FromRole_SalesOrderCustomerCustomer"/>
+                <End Type="eee73946d844daab19731e71.Customer" Multiplicity="1" Role="ToRole_SalesOrderCustomerCustomer"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_SalesOrderCustomerCustomer">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="FromRole_SalesOrderCustomerCustomer">
+                        <PropertyRef Name="___FK_71ff592b32dbe7b8107ddfd8_00047"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="SalesOrderPaymentPayment">
+                <End Type="eee73946d844daab19731e71.SalesOrder" Multiplicity="1" Role="FromRole_SalesOrderPaymentPayment"/>
+                <End Type="eee73946d844daab19731e71.Payment" Multiplicity="1" Role="ToRole_SalesOrderPaymentPayment"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_SalesOrderPaymentPayment">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="FromRole_SalesOrderPaymentPayment">
+                        <PropertyRef Name="___FK_71ff592b32dbe7b8107ddfd8_00049"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="SalesOrderShipToAddress">
+                <End Type="eee73946d844daab19731e71.SalesOrder" Multiplicity="1" Role="FromRole_SalesOrderShipToAddress"/>
+                <End Type="eee73946d844daab19731e71.Address" Multiplicity="1" Role="ToRole_SalesOrderShipToAddress"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_SalesOrderShipToAddress">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="FromRole_SalesOrderShipToAddress">
+                        <PropertyRef Name="___FK_71ff592b32dbe7b8107ddfd8_00051"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="SalesOrderBillToAddress">
+                <End Type="eee73946d844daab19731e71.SalesOrder" Multiplicity="1" Role="FromRole_SalesOrderBillToAddress"/>
+                <End Type="eee73946d844daab19731e71.Address" Multiplicity="1" Role="ToRole_SalesOrderBillToAddress"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_SalesOrderBillToAddress">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="FromRole_SalesOrderBillToAddress">
+                        <PropertyRef Name="___FK_71ff592b32dbe7b8107ddfd8_00053"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="SalesOrderSalesOrderItemSalesOrderItem">
+                <End Type="eee73946d844daab19731e71.SalesOrder" Multiplicity="1" Role="FromRole_SalesOrderSalesOrderItemSalesOrderItem"/>
+                <End Type="eee73946d844daab19731e71.SalesOrderItem" Multiplicity="*" Role="ToRole_SalesOrderSalesOrderItemSalesOrderItem"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_SalesOrderSalesOrderItemSalesOrderItem">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_SalesOrderSalesOrderItemSalesOrderItem">
+                        <PropertyRef Name="___FK_71ff592b32dbe7b8107ddfd8_00055"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityType Name="Customer">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="Name" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Name"/>
+                <Property Name="Email" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Email"/>
+                <Property Name="Phone" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Phone"/>
+                <Property Name="Mobile" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Mobile"/>
+                <NavigationProperty Name="SalesOrder" Relationship="eee73946d844daab19731e71.CustomerSalesOrderSalesOrder" FromRole="FromRole_CustomerSalesOrderSalesOrder" ToRole="ToRole_CustomerSalesOrderSalesOrder"/>
+            </EntityType>
+            <Association Name="CustomerSalesOrderSalesOrder">
+                <End Type="eee73946d844daab19731e71.Customer" Multiplicity="1" Role="FromRole_CustomerSalesOrderSalesOrder"/>
+                <End Type="eee73946d844daab19731e71.SalesOrder" Multiplicity="*" Role="ToRole_CustomerSalesOrderSalesOrder"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_CustomerSalesOrderSalesOrder">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_CustomerSalesOrderSalesOrder">
+                        <PropertyRef Name="___FK_71ff592b32dbe7b8107ddfd8_00057"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityType Name="Payment">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="Method" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Method"/>
+                <Property Name="Terms" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Terms"/>
+            </EntityType>
+            <EntityType Name="Address">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="Name" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Name"/>
+                <Property Name="Address" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Address"/>
+            </EntityType>
+            <EntityType Name="Product">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="Name" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Name"/>
+                <Property Name="Image" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Image"/>
+                <Property Name="MainCategory" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="MainCategory"/>
+                <Property Name="Category" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Category"/>
+                <Property Name="NameWithCode" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:calculated="{&quot;calculation&quot;:&quot;[{\&quot;label\&quot;:\&quot;+\&quot;,\&quot;name\&quot;:\&quot;plus\&quot;,\&quot;type\&quot;:\&quot;operator\&quot;,\&quot;left\&quot;:[{\&quot;label\&quot;:\&quot;+\&quot;,\&quot;name\&quot;:\&quot;plus\&quot;,\&quot;type\&quot;:\&quot;operator\&quot;,\&quot;left\&quot;:[{\&quot;label\&quot;:\&quot;+\&quot;,\&quot;name\&quot;:\&quot;plus\&quot;,\&quot;type\&quot;:\&quot;operator\&quot;,\&quot;left\&quot;:[{\&quot;label\&quot;:\&quot;PROPERTY\&quot;,\&quot;name\&quot;:\&quot;property\&quot;,\&quot;entityId\&quot;:\&quot;Product\&quot;,\&quot;navPropId\&quot;:\&quot;\&quot;,\&quot;navPropOp\&quot;:null,\&quot;propertyId\&quot;:\&quot;Name\&quot;,\&quot;type\&quot;:\&quot;property\&quot;,\&quot;propertyType\&quot;:\&quot;String\&quot;,\&quot;isNewLine\&quot;:false,\&quot;id\&quot;:4,\&quot;computedType\&quot;:\&quot;string\&quot;,\&quot;entityName\&quot;:\&quot;Product\&quot;,\&quot;propertyName\&quot;:\&quot;Name\&quot;}],\&quot;right\&quot;:[{\&quot;label\&quot;:\&quot;VALUE\&quot;,\&quot;name\&quot;:\&quot;value\&quot;,\&quot;type\&quot;:\&quot;value\&quot;,\&quot;value\&quot;:\&quot; (\&quot;,\&quot;isNewLine\&quot;:false,\&quot;id\&quot;:5,\&quot;computedType\&quot;:\&quot;string\&quot;}],\&quot;displayLabel\&quot;:\&quot;+\&quot;,\&quot;isNewLine\&quot;:false,\&quot;id\&quot;:3,\&quot;computedType\&quot;:\&quot;string\&quot;}],\&quot;right\&quot;:[{\&quot;label\&quot;:\&quot;PROPERTY\&quot;,\&quot;name\&quot;:\&quot;property\&quot;,\&quot;entityId\&quot;:\&quot;Product\&quot;,\&quot;navPropId\&quot;:\&quot;\&quot;,\&quot;navPropOp\&quot;:null,\&quot;propertyId\&quot;:\&quot;ID\&quot;,\&quot;type\&quot;:\&quot;property\&quot;,\&quot;propertyType\&quot;:\&quot;String\&quot;,\&quot;isNewLine\&quot;:false,\&quot;id\&quot;:6,\&quot;computedType\&quot;:\&quot;string\&quot;,\&quot;entityName\&quot;:\&quot;Product\&quot;,\&quot;propertyName\&quot;:\&quot;ID\&quot;}],\&quot;displayLabel\&quot;:\&quot;+\&quot;,\&quot;isNewLine\&quot;:true,\&quot;id\&quot;:2,\&quot;computedType\&quot;:\&quot;string\&quot;}],\&quot;right\&quot;:[{\&quot;label\&quot;:\&quot;VALUE\&quot;,\&quot;name\&quot;:\&quot;value\&quot;,\&quot;type\&quot;:\&quot;value\&quot;,\&quot;value\&quot;:\&quot;)\&quot;,\&quot;isNewLine\&quot;:false,\&quot;id\&quot;:7,\&quot;computedType\&quot;:\&quot;string\&quot;}],\&quot;displayLabel\&quot;:\&quot;+\&quot;,\&quot;isNewLine\&quot;:false,\&quot;id\&quot;:1,\&quot;computedType\&quot;:\&quot;string\&quot;}]&quot;,&quot;inputProperties&quot;:[{&quot;navPropId&quot;:&quot;&quot;,&quot;entityId&quot;:&quot;Product&quot;,&quot;propertyId&quot;:&quot;Name&quot;},{&quot;navPropId&quot;:&quot;&quot;,&quot;entityId&quot;:&quot;Product&quot;,&quot;propertyId&quot;:&quot;ID&quot;}]}" sap:label="NameWithCode"/>
+            </EntityType>
+            <EntityType Name="SalesOrderItem">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="DeliveryTime" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DeliveryTime"/>
+                <Property Name="Quantity" Type="Edm.Decimal" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Quantity"/>
+                <Property Name="QuantityUnit" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="QuantityUnit"/>
+                <Property Name="UnitPrice" Type="Edm.Decimal" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="UnitPrice"/>
+                <Property Name="Currency" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Currency"/>
+                <Property Name="GrossAmount" Type="Edm.Decimal" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="GrossAmount"/>
+                <Property Name="Image" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Image"/>
+                <Property Name="___FK_71ff592b32dbe7b8107ddfd8_00055" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="___FK_71ff592b32dbe7b8107ddfd8_00055"/>
+                <Property Name="___FK_71ff592b32dbe7b8107ddfd8_00059" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="___FK_71ff592b32dbe7b8107ddfd8_00059"/>
+                <Property Name="ItemNum" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ItemNum"/>
+                <Property Name="___FK_5debb039a5a4984d107ddfab_00006" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="___FK_5debb039a5a4984d107ddfab_00006"/>
+                <Property Name="___FK_d4bb8836f5baf1ac107def91_00005" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="___FK_d4bb8836f5baf1ac107def91_00005"/>
+                <Property Name="Year" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:calculated="{&quot;calculation&quot;:&quot;[{\&quot;label\&quot;:\&quot;PROPERTY\&quot;,\&quot;name\&quot;:\&quot;property\&quot;,\&quot;entityId\&quot;:\&quot;SalesOrder\&quot;,\&quot;navPropId\&quot;:\&quot;SalesOrder\&quot;,\&quot;navPropOp\&quot;:null,\&quot;propertyId\&quot;:\&quot;Year\&quot;,\&quot;type\&quot;:\&quot;property\&quot;,\&quot;propertyType\&quot;:\&quot;String\&quot;,\&quot;isNewLine\&quot;:false,\&quot;id\&quot;:1,\&quot;computedType\&quot;:\&quot;string\&quot;,\&quot;navPropName\&quot;:\&quot;SalesOrder\&quot;,\&quot;entityName\&quot;:\&quot;SalesOrder\&quot;,\&quot;propertyName\&quot;:\&quot;Year\&quot;}]&quot;,&quot;inputProperties&quot;:[{&quot;navPropId&quot;:&quot;SalesOrder&quot;,&quot;entityId&quot;:&quot;SalesOrder&quot;,&quot;propertyId&quot;:&quot;Year&quot;}]}" sap:label="Year"/>
+                <Property Name="ProductImage" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:calculated="{&quot;calculation&quot;:&quot;[{\&quot;label\&quot;:\&quot;PROPERTY\&quot;,\&quot;name\&quot;:\&quot;property\&quot;,\&quot;entityId\&quot;:\&quot;Product\&quot;,\&quot;navPropId\&quot;:\&quot;Product\&quot;,\&quot;navPropOp\&quot;:null,\&quot;propertyId\&quot;:\&quot;Image\&quot;,\&quot;type\&quot;:\&quot;property\&quot;,\&quot;propertyType\&quot;:\&quot;String\&quot;,\&quot;isNewLine\&quot;:false,\&quot;id\&quot;:1,\&quot;computedType\&quot;:\&quot;string\&quot;,\&quot;navPropName\&quot;:\&quot;Product\&quot;,\&quot;entityName\&quot;:\&quot;Product\&quot;,\&quot;propertyName\&quot;:\&quot;Image\&quot;}]&quot;,&quot;inputProperties&quot;:[{&quot;propertyId&quot;:&quot;Image&quot;,&quot;entityId&quot;:&quot;Product&quot;,&quot;navPropId&quot;:&quot;Product&quot;}]}" sap:label="ProductImage"/>
+                <NavigationProperty Name="Product" Relationship="eee73946d844daab19731e71.SalesOrderItemProductProduct" FromRole="FromRole_SalesOrderItemProductProduct" ToRole="ToRole_SalesOrderItemProductProduct"/>
+                <NavigationProperty Name="SalesOrder" Relationship="eee73946d844daab19731e71.SalesOrderItemSalesOrderSalesOrder" FromRole="FromRole_SalesOrderItemSalesOrderSalesOrder" ToRole="ToRole_SalesOrderItemSalesOrderSalesOrder"/>
+                <NavigationProperty Name="Customer" Relationship="eee73946d844daab19731e71.SalesOrderItemCustomerCustomer" FromRole="FromRole_SalesOrderItemCustomerCustomer" ToRole="ToRole_SalesOrderItemCustomerCustomer"/>
+            </EntityType>
+            <Association Name="SalesOrderItemProductProduct">
+                <End Type="eee73946d844daab19731e71.SalesOrderItem" Multiplicity="1" Role="FromRole_SalesOrderItemProductProduct"/>
+                <End Type="eee73946d844daab19731e71.Product" Multiplicity="1" Role="ToRole_SalesOrderItemProductProduct"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_SalesOrderItemProductProduct">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="FromRole_SalesOrderItemProductProduct">
+                        <PropertyRef Name="___FK_71ff592b32dbe7b8107ddfd8_00059"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="SalesOrderItemSalesOrderSalesOrder">
+                <End Type="eee73946d844daab19731e71.SalesOrderItem" Multiplicity="1" Role="FromRole_SalesOrderItemSalesOrderSalesOrder"/>
+                <End Type="eee73946d844daab19731e71.SalesOrder" Multiplicity="1" Role="ToRole_SalesOrderItemSalesOrderSalesOrder"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_SalesOrderItemSalesOrderSalesOrder">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="FromRole_SalesOrderItemSalesOrderSalesOrder">
+                        <PropertyRef Name="___FK_5debb039a5a4984d107ddfab_00006"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="SalesOrderItemCustomerCustomer">
+                <End Type="eee73946d844daab19731e71.SalesOrderItem" Multiplicity="1" Role="FromRole_SalesOrderItemCustomerCustomer"/>
+                <End Type="eee73946d844daab19731e71.Customer" Multiplicity="1" Role="ToRole_SalesOrderItemCustomerCustomer"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_SalesOrderItemCustomerCustomer">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="FromRole_SalesOrderItemCustomerCustomer">
+                        <PropertyRef Name="___FK_d4bb8836f5baf1ac107def91_00005"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityType Name="Statuses">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+            </EntityType>
+            <EntityType Name="PaymentMethods">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+            </EntityType>
+            <EntityType Name="PaymentTerms">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+            </EntityType>
+            <EntityType Name="MainCategories">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="MainCategory" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="MainCategory"/>
+            </EntityType>
+            <EntityType Name="Quarters">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="Quarter" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Quarter"/>
+            </EntityType>
+            <EntityType Name="ItemSalesSet">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="Material" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Material"/>
+                <Property Name="Value" Type="Edm.Double" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Value"/>
+            </EntityType>
+            <EntityType Name="Object1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+            </EntityType>
+            <EntityType Name="CustomerSalesSet" sap:pdm-semantics="business-data">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="CustomerID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="C"/>
+                <Property Name="Total" Type="Edm.Int32" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Total"/>
+            </EntityType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

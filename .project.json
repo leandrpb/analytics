@@ -1,0 +1,25 @@
+{
+    "dataBinding": {
+        "/webapp/view/Page1.view.xml": {
+            "entitySet": ""
+        }, 
+        "/webapp/view/Popover5.view.xml": {
+            "entitySet": "/SalesOrderItemSet"
+        }, 
+        "/webapp/view/Popover6.view.xml": {
+            "entitySet": "/CustomerSet"
+        }, 
+        "/webapp/view/Popover4.view.xml": {
+            "entitySet": "/SalesOrderSet"
+        }, 
+        "/webapp/view/Popover3.view.xml": {
+            "entitySet": ""
+        }, 
+        "/webapp/view/Popover2.view.xml": {
+            "entitySet": ""
+        }, 
+        "/webapp/view/Popover1.view.xml": {
+            "entitySet": ""
+        } 
+    }
+}

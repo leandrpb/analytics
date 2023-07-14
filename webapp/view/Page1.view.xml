@@ -1,0 +1,301 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.salesOrderAnalysis.controller.Page1" xmlns:f="sap.f" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:smartvariants="sap.ui.comp.smartvariants" xmlns:filterbar="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:microchart="sap.suite.ui.microchart">
+    <f:DynamicPage headerExpanded="true" showFooter="false" class="sapSmartTemplatesAnalyticalListPageDynamicPage sapUiSizeCompact" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle areaShrinkRatio="0:3:0.7" class="sapSmartTemplatesAnalyticalListPageDynamicPageTitle sapSmartTemplatesAnalyticalListPageDynamicPageTitleMargin">
+                <f:heading>
+                    <layout:VerticalLayout class="sapSmartTemplatesAnalyticalListPageFilterContainer">
+                        <layout:content>
+                            <layout:HorizontalLayout class="sapSmartTemplatesAnalyticalListPageAlignVariantTitle sapUIContentPadding">
+                                <layout:content>
+                                    <smartvariants:SmartVariantManagement showShare="true" showExecuteOnSelection="false"/>
+                                </layout:content>
+                            </layout:HorizontalLayout>
+                        </layout:content>
+                    </layout:VerticalLayout>
+                </f:heading>
+                <f:content>
+                    <OverflowToolbar class="sapSmartTemplatesAnalyticalListPageKpiTagContainer sapSmartTemplatesAnalyticalListPageKpiTagOverflow">
+                        <content>
+                            <Toolbar design="Transparent" style="Clear" active="true" visible="true" press="_onFioriAnalyticalListPageKpiPress">
+                                <content>
+                                    <HBox fitContainer="true" class="sapSmartTemplatesAnalyticalListPageKpiTag sapSmartTemplatesAnalyticalListPageKpiTagCozy sapSmartTemplatesAnalyticalListPageKPICritical">
+                                        <items>
+                                            <ObjectStatus class="sapSmartTemplatesAnalyticalListPageKpiTagName" text="SR"/>
+                                            <ObjectNumber class="sapSmartTemplatesAnalyticalListPageKpiTagValue" number="13.6M" unit="USD" emphasized="false" state="Warning"/>
+                                        </items>
+                                    </HBox>
+                                </content>
+                            </Toolbar>
+                        </content>
+                    </OverflowToolbar>
+                </f:content>
+                <f:actions>
+                    <ToolbarSpacer/>
+                    <OverflowToolbarButton icon="sap-icon://action" type="Transparent" tooltip="Share" visible="true" text="Share">
+                        <layoutData>
+                            <OverflowToolbarLayoutData closeOverflowOnInteraction="false" priority="High"/>
+                        </layoutData>
+                    </OverflowToolbarButton>
+                    <SegmentedButton selectedKey="{alpModel>/filterHeaderOption}" width="inherit" visible="true" selectionChange="_onFioriAnalyticalListPageHeaderActionsSelectionChange">
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                        </layoutData>
+                        <items>
+                            <SegmentedButtonItem icon="sap-icon://filter-fields" tooltip="compact" key="compact" press="_onFioriAnalyticalListPageHeaderActionsPress"/>
+                            <SegmentedButtonItem icon="sap-icon://filter-analytics" tooltip="visual" key="visual" press="_onFioriAnalyticalListPageHeaderActionsPress1"/>
+                        </items>
+                    </SegmentedButton>
+                </f:actions>
+                <f:snappedContent>
+                    <Text class="sapSmartTemplatesAnalyticalListPageSnappedContentText"/>
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true" class="sapFDynamicPageHeaderContent">
+                <f:content>
+                    <filterbar:FilterBar visible="true" useToolbar="false" showGoOnFB="true">
+                        <filterbar:filterGroupItems>
+                            
+                            <filterbar:FilterGroupItem groupName="Barra" mandatory="false" label="Year" name="Fiori_AnalyticalListPage_AnalyticalListPage_0-analyticalheader-Fiori_AnalyticalListPage_AnalyticalHeader-1-filterbars-Fiori_AnalyticalListPage_FilterBar-1-filters-Fiori_AnalyticalListPage_StandardFilter-1---0">
+                                <filterbar:control>
+                                    <MultiInput/>
+                                </filterbar:control>
+                            </filterbar:FilterGroupItem>
+                            <filterbar:FilterGroupItem groupName="Barra" mandatory="false" label="Customer" name="Fiori_AnalyticalListPage_AnalyticalListPage_0-analyticalheader-Fiori_AnalyticalListPage_AnalyticalHeader-1-filterbars-Fiori_AnalyticalListPage_FilterBar-1-filters-Fiori_AnalyticalListPage_StandardFilter-1544627446595---0">
+                                <filterbar:control>
+                                    <MultiInput/>
+                                </filterbar:control>
+                            </filterbar:FilterGroupItem>
+                            <filterbar:FilterGroupItem groupName="Barra" mandatory="false" label="Product" name="Fiori_AnalyticalListPage_AnalyticalListPage_0-analyticalheader-Fiori_AnalyticalListPage_AnalyticalHeader-1-filterbars-Fiori_AnalyticalListPage_FilterBar-1-filters-Fiori_AnalyticalListPage_StandardFilter-1544627461522---0">
+                                <filterbar:control>
+                                    <MultiInput/>
+                                </filterbar:control>
+                            </filterbar:FilterGroupItem>
+                            <filterbar:FilterGroupItem groupName="Barra" mandatory="false" label="Main Category" name="Fiori_AnalyticalListPage_AnalyticalListPage_0-analyticalheader-Fiori_AnalyticalListPage_AnalyticalHeader-1-filterbars-Fiori_AnalyticalListPage_FilterBar-1-filters-Fiori_AnalyticalListPage_ComboBoxFilter-1544627476224---0">
+                                <filterbar:control>
+                                    <MultiComboBox items="{path:'/MainCategoriesSet', templateShareable:true}">
+                                        <items>
+                                            <core:Item key="{MainCategory}" text="{MainCategory}"/>
+                                        </items>
+                                    </MultiComboBox>
+                                </filterbar:control>
+                            </filterbar:FilterGroupItem>
+                            <filterbar:FilterGroupItem groupName="Barra" mandatory="false" label="Quarter" name="Fiori_AnalyticalListPage_AnalyticalListPage_0-analyticalheader-Fiori_AnalyticalListPage_AnalyticalHeader-1-filterbars-Fiori_AnalyticalListPage_FilterBar-1-filters-Fiori_AnalyticalListPage_ComboBoxFilter-1544627494976---0">
+                                <filterbar:control>
+                                    <MultiComboBox items="{path:'/QuartersSet', templateShareable:true}">
+                                        <items>
+                                            <core:Item key="{Quarter}" text="{Quarter}"/>
+                                        </items>
+                                    </MultiComboBox>
+                                </filterbar:control>
+                            </filterbar:FilterGroupItem>
+                        </filterbar:filterGroupItems>                        
+                    </filterbar:FilterBar>
+                    <HeaderContainer visible="{= (${alpModel>/filterHeaderOption} === 'visual') }">
+                        <content>
+                            <VBox>
+                                <items>
+                                    <HBox alignItems="Center" justifyContent="SpaceBetween" alignContent="Stretch" width="20rem" class="sapUiSmallMargin">
+                                        <items>
+                                            <Label text="Maiores Compradores" required="false"/>
+                                            <Button icon="sap-icon://value-help" type="Transparent"/>
+                                        </items>
+                                    </HBox>
+                                    <FlexBox width="20rem" height="13rem" alignItems="Center" class="sapUiSmallMargin">
+                                        <items>
+                                            <microchart:InteractiveBarChart  displayedBars="5" labelWidth="40%" bars="{path:'/CustomerSalesSet', templateShareable:true}">
+                                                <microchart:bars>
+                                                    <microchart:InteractiveBarChartBar color="Neutral" displayedValue="{Total}" label="`{CustomerName}" value="{parts: ['Total'], formatter: '.convertToFloat'}" />
+                                                </microchart:bars>
+                                            </microchart:InteractiveBarChart>
+                                        </items>
+                                    </FlexBox>
+                                </items>
+                            </VBox>
+                            <VBox>
+                                <items>
+                                    <HBox alignItems="Center" justifyContent="SpaceBetween" alignContent="Stretch" width="20rem" class="sapUiSmallMargin">
+                                        <items>
+                                            <Label text="Revenue by Year | M USD" required="false"/>
+                                            <Button icon="sap-icon://value-help" type="Transparent"/>
+                                        </items>
+                                    </HBox>
+                                    <FlexBox width="20rem" height="13rem" alignItems="Center" class="sapUiSmallMargin">
+                                        <items>
+                                            <microchart:InteractiveLineChart displayedPoints="6">
+                                                <microchart:points>
+                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2013" value="0.8" selected="false"/>
+                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2014" value="1.5" selected="false"/>
+                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2015" value="0.7" selected="false"/>
+                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2016" value="1.5" selected="false"/>
+                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2017" value="1.7" selected="false"/>
+                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2018" value="0.6" selected="false"/>
+                                                </microchart:points>
+                                            </microchart:InteractiveLineChart>
+                                        </items>
+                                    </FlexBox>
+                                </items>
+                            </VBox>
+                            <VBox>
+                                <items>
+                                    <HBox alignItems="Center" justifyContent="SpaceBetween" alignContent="Stretch" width="20rem" class="sapUiSmallMargin">
+                                        <items>
+                                            <Label text="Revenue by Main Category | K USD" required="false"/>
+                                            <Button icon="sap-icon://slim-arrow-down" type="Transparent" press="_onFioriAnalyticalListPageVisualFilterItemDonutChartPress"/>
+                                        </items>
+                                    </HBox>
+                                    <FlexBox width="20rem" height="13rem" alignItems="Center" class="sapUiSmallMargin">
+                                        <items>
+                                            <microchart:InteractiveDonutChart displayedSegments="3">
+                                                <microchart:segments>
+                                                    <microchart:InteractiveDonutChartSegment color="Neutral" label="Computer Systems" value="10.5" selected="false"/>
+                                                    <microchart:InteractiveDonutChartSegment color="Neutral" label="Computer Components" value="1.5" selected="false"/>
+                                                    <microchart:InteractiveDonutChartSegment color="Neutral" label="Other" value="1.9" selected="false"/>
+                                                </microchart:segments>
+                                            </microchart:InteractiveDonutChart>
+                                        </items>
+                                    </FlexBox>
+                                </items>
+                            </VBox>
+                        </content>
+                    </HeaderContainer>
+                    <OverflowToolbar visible="{= (${alpModel>/filterHeaderOption} === 'visual') }" style="Clear" class="sapSmartTemplatesAnalyticalListPageVisualFilterToolbar">
+                        <content>
+                            <ToolbarSpacer/>
+                            <Button text="Adapt Filters" type="Transparent"/>
+                            <Button text="Go" tooltip="filter" type="Emphasized"/>
+                        </content>
+                    </OverflowToolbar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <VBox class="sapSmartTemplatesAnalyticalListPageInheritHeight sapSmartTemplatesAnalyticalListPageMasterExtension">
+                <items>
+                    <OverflowToolbar style="Clear" class="sapSmartTemplatesAnalyticalListPageFilterableKPIContainer">
+                        <content>
+                            <Title text="Project Costs" class="sapSmartTemplatesAnalyticalListPageFilterableKPITitle"/>
+                            <HBox>
+                                <items/>
+                            </HBox>
+                            <ToolbarSpacer/>
+                            <SegmentedButton selectedKey="{alpModel>/contentView}" width="inherit" visible="true" selectionChange="_onFioriAnalyticalListPageContentActionsSelectionChange">
+                                <items>
+                                    <SegmentedButtonItem tooltip="Chart and Table View" key="charttable" icon="sap-icon://chart-table-view" press="_onFioriAnalyticalListPageContentActionsPress"/>
+                                    <SegmentedButtonItem tooltip="Chart View" key="chart" icon="sap-icon://vertical-bar-chart-2" press="_onFioriAnalyticalListPageContentActionsPress1"/>
+                                    <SegmentedButtonItem tooltip="Table View" key="table" icon="sap-icon://table-view" press="_onFioriAnalyticalListPageContentActionsPress2"/>
+                                </items>
+                                <layoutData>
+                                    <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                                </layoutData>
+                            </SegmentedButton>
+                        </content>
+                    </OverflowToolbar>
+                    <VBox fitContainer="true">
+                        <items>
+                            <VBox visible="{= (${alpModel>/contentView} === 'table' || ${alpModel>/contentView} === 'charttable') }" class="sapSmartTemplatesAnalyticalListPageTableContainer">
+                                <items>
+                                    <Table width="1172.3125px" noDataText="No data" showSeparators="All" growing="true" growingScrollToLoad="true" growingThreshold="20" mode="MultiSelect" class="sapUiCompSmartTable" items="{path:'/SalesOrderItemSet', templateShareable:true, parameters:{expand:'SalesOrder,Product,Customer'}}">
+                                        <headerToolbar>
+                                            <OverflowToolbar design="Transparent" class="sapUiCompSmartTableToolbar" style="Clear">
+                                                <content>
+                                                    <Title textAlign="Begin" text="Sales Order Items (4)"/>
+                                                    <ToolbarSpacer/>
+                                                    <SegmentedButton>
+                                                        <items>
+                                                            <SegmentedButtonItem icon="sap-icon://show"/>
+                                                            <SegmentedButtonItem icon="sap-icon://hide"/>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                    <OverflowToolbarButton text="Sort" type="Transparent" icon="sap-icon://action-settings" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                                    <OverflowToolbarButton type="Transparent" text="Filter" icon="{path: 'alpModel>/exitFullscreenTable', formatter: '.formatFullscreenIconAnalyticalControl'}" iconFirst="true" width="auto" press="_onFioriAnalyticalListPageTablePress"/>
+                                                </content>
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+                                        <columns>
+                                            <Column width="60px" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                <header>
+                                                    <Text text="Year" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </header>
+                                                <footer/>
+                                            </Column>
+                                            <Column width="60px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                <header>
+                                                    <Text text="Month" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </header>
+                                                <footer/>
+                                            </Column>
+                                            <Column width="90px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                <header>
+                                                    <Text text="Sale Order" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </header>
+                                                <footer/>
+                                            </Column>
+                                            <Column width="40px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                <header>
+                                                    <Text text="Item" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </header>
+                                                <footer/>
+                                            </Column>
+                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                <header>
+                                                    <Text text="Product" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </header>
+                                                <footer/>
+                                            </Column>
+                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                <header>
+                                                    <Text text="Main Category" width="93.25px" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </header>
+                                                <footer/>
+                                            </Column>
+                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                <header>
+                                                    <Text text="Customer" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </header>
+                                                <footer/>
+                                            </Column>
+                                            <Column width="70px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                <header>
+                                                    <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </header>
+                                                <footer/>
+                                            </Column>
+                                            <Column width="100px" hAlign="Right" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                <header>
+                                                    <Text text="Revenue" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </header>
+                                                <footer/>
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem type="Active">
+                                                <cells>
+                                                    <Text text="{SalesOrder/Year}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Text text="{SalesOrder/Month}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Link text="{SalesOrder/ID}" textAlign="Begin" width="auto" target="_blank" wrapping="false" enabled="true" visible="true" emphasized="false" subtle="false" press="_onLinkPress"/>
+                                                    <Text text="{ItemNum}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Link text="{Product/NameWithCode}" textAlign="Begin" width="180px" target="_blank" wrapping="false" enabled="true" visible="true" emphasized="false" subtle="false" press="_onLinkPress1"/>
+                                                    <Text text="{Product/MainCategory}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Text text="{Customer/Name}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <ObjectNumber number="{path: 'Quantity', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="{QuantityUnit}" emphasized="true" state="None"/>
+                                                    <ObjectNumber number="{path: 'UnitPrice', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="{Currency}" emphasized="true" state="None"/>
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </items>
+                            </VBox>
+                        </items>
+                    </VBox>
+                </items>
+            </VBox>
+        </f:content>
+        <f:dependents>
+            <Dialog showHeader="false" stretch="true" class="sapUiCompSmartFullScreenDialog sapUiSizeCompact">
+                <content/>
+            </Dialog>
+        </f:dependents>
+    </f:DynamicPage>
+</mvc:View>
