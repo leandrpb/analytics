@@ -1,9 +1,20 @@
 sap.ui.define(["sap/ui/core/mvc/Controller",
+	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"./Popover1", "./Popover2", "./Popover4", "./Popover5",
 	"./utilities",
 	"sap/ui/core/routing/History",
-], function(Controller, MessageBox, Popover1, Popover2, Popover4, Popover5, Utilities, History) {
+	'sap/ui/model/Filter'
+], function(Controller,
+	JSONModel,
+	MessageBox,
+	Popover1,
+	Popover2,
+	Popover4,
+	Popover5,
+	utilities,
+	History,
+	Filter) {
 	"use strict";
 
 	return Controller.extend("com.sap.build.standard.salesOrderAnalysis.controller.Page1", {
@@ -47,15 +58,27 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		onBarClick: function(oControlEvent)
 		{
-			debugger;
 
 			let sCustomerNameClicked = oControlEvent.getParameters().bar.getLabel();
 
-			let oModel = this.getOwnerComponent().getModel();
+			let jModel = new JSONModel();
 
-			let oDataLoad = oModel.read("/CustomerSalesSet");
+            let oModel = this.getOwnerComponent().getModel();
 
+			let oFilter = new Array();
 
+			oFilter[0] = new Filter("CustomerID", sap.ui.model.FilterOperator.EQ, 'USCU_L03');
+
+			//let sCaminho = oModel.create("/CustomerSalesYearSet", {CustomerID: 'USCU_L03'});
+
+			let oChartID = this.getView().byId("ChartID");
+
+			debugger;
+
+			//VER A MERDA DO RANGE AMANHA
+
+		//	oChartID.bindPoints(oModel.read(sCaminho));
+		    oChartID.bindElement({path: '/CustomerSalesYearSet', filters: oFilter});
 
 
 		},

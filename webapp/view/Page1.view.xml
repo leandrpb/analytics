@@ -123,14 +123,9 @@
                                     </HBox>
                                     <FlexBox width="20rem" height="13rem" alignItems="Center" class="sapUiSmallMargin">
                                         <items>
-                                            <microchart:InteractiveLineChart displayedPoints="6">
+                                            <microchart:InteractiveLineChart id="ChartID" displayedPoints="6" points="/CustomerSalesYearsSet">
                                                 <microchart:points>
-                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2013" value="0.8" selected="false"/>
-                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2014" value="1.5" selected="false"/>
-                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2015" value="0.7" selected="false"/>
-                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2016" value="1.5" selected="false"/>
-                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2017" value="1.7" selected="false"/>
-                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="2018" value="0.6" selected="false"/>
+                                                    <microchart:InteractiveLineChartPoint color="Neutral" label="{Year}" value="{parts: ['Total'], formatter: '.convertToFloat'}" selected="false"/>
                                                 </microchart:points>
                                             </microchart:InteractiveLineChart>
                                         </items>
