@@ -45,6 +45,21 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 
+		onBarClick: function(oControlEvent)
+		{
+			debugger;
+
+			let sCustomerNameClicked = oControlEvent.getParameters().bar.getLabel();
+
+			let oModel = this.getOwnerComponent().getModel();
+
+			let oDataLoad = oModel.read("/CustomerSalesSet");
+
+
+
+
+		},
+
 		_parseValue: function(sInformedValue) {
 			
 			debugger;

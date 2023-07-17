@@ -104,9 +104,9 @@
                                     </HBox>
                                     <FlexBox width="20rem" height="13rem" alignItems="Center" class="sapUiSmallMargin">
                                         <items>
-                                            <microchart:InteractiveBarChart  displayedBars="5" labelWidth="40%" bars="{path:'/CustomerSalesSet', templateShareable:true}">
+                                            <microchart:InteractiveBarChart  displayedBars="5" labelWidth="40%" bars="{path:'/CustomerSalesSet', templateShareable:true}" selectionChanged="onBarClick">
                                                 <microchart:bars>
-                                                    <microchart:InteractiveBarChartBar color="Neutral" displayedValue="{Total}" label="`{CustomerName}" value="{parts: ['Total'], formatter: '.convertToFloat'}" />
+                                                    <microchart:InteractiveBarChartBar  color="Neutral" displayedValue="{Total}" label="{CustomerName}" value="{parts: ['Total'], formatter: '.convertToFloat'}" />
                                                 </microchart:bars>
                                             </microchart:InteractiveBarChart>
                                         </items>
@@ -196,7 +196,7 @@
                         <items>
                             <VBox visible="{= (${alpModel>/contentView} === 'table' || ${alpModel>/contentView} === 'charttable') }" class="sapSmartTemplatesAnalyticalListPageTableContainer">
                                 <items>
-                                    <Table width="1172.3125px" noDataText="No data" showSeparators="All" growing="true" growingScrollToLoad="true" growingThreshold="20" mode="MultiSelect" class="sapUiCompSmartTable" items="{path:'/SalesOrderItemSet', templateShareable:true, parameters:{expand:'SalesOrder,Product,Customer'}}">
+                                    <Table width="1172.3125px" noDataText="No data" showSeparators="All" growing="true" growingScrollToLoad="true" growingThreshold="20" mode="MultiSelect" class="sapUiCompSmartTable" items="">
                                         <headerToolbar>
                                             <OverflowToolbar design="Transparent" class="sapUiCompSmartTableToolbar" style="Clear">
                                                 <content>
