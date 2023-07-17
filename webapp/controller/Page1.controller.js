@@ -4,7 +4,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"./Popover1", "./Popover2", "./Popover4", "./Popover5",
 	"./utilities",
 	"sap/ui/core/routing/History",
-	'sap/ui/model/Filter'
+	"sap/ui/model/Filter",
+    "sap/suite/ui/microchart/InteractiveLineChartPoint"
 ], function(Controller,
 	JSONModel,
 	MessageBox,
@@ -14,7 +15,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	Popover5,
 	utilities,
 	History,
-	Filter) {
+	Filter,
+	InteractiveLineChartPoint) {
 	"use strict";
 
 	return Controller.extend("com.sap.build.standard.salesOrderAnalysis.controller.Page1", {
@@ -56,36 +58,58 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 
+		onInit: function() {
+			this.getView().byId("ChartID").removeAllPoints();
+		},
+
 		onBarClick: function(oControlEvent)
 		{
 
-			let sCustomerNameClicked = oControlEvent.getParameters().bar.getLabel();
-
-			let jModel = new JSONModel();
-
+			// Get CustomData from Clicked Bar
+			let sCustomerIDClicked = oControlEvent.getParameters().bar.getCustomData()[0].getValue();
+			oControlEvent.getParameters().bar.setProperty("selected", false);
+            
+			// Get Model
             let oModel = this.getOwnerComponent().getModel();
 
 			let oFilter = new Array();
+			oFilter.push(new Filter("CustomerID", sap.ui.model.FilterOperator.EQ, sCustomerIDClicked));	
 
-			oFilter[0] = new Filter("CustomerID", sap.ui.model.FilterOperator.EQ, 'USCU_L03');
+			oModel.read("/CustomerSalesYearSet", {
+			   filters: oFilter,
+               success: (oData) => {
+				this._setPoints(oData);
+			   },
+			   error: (oError) => {
+			   }
+			});
+		},
 
-			//let sCaminho = oModel.create("/CustomerSalesYearSet", {CustomerID: 'USCU_L03'});
+		_setPoints: function(oData) {
 
 			let oChartID = this.getView().byId("ChartID");
+			oChartID.removeAllPoints();
 
-			debugger;
+			var index;
+			var total = oData.results.length;
 
-			//VER A MERDA DO RANGE AMANHA
+			for(index=0;index<total;index++)
+			{
+				let oDataItem = oData.results[index];
 
-		//	oChartID.bindPoints(oModel.read(sCaminho));
-		    oChartID.bindElement({path: '/CustomerSalesYearSet', filters: oFilter});
+                let oPoint = new InteractiveLineChartPoint();
 
+				oPoint.setLabel(oDataItem.Year);
+				oPoint.setValue(this._parseValue(oDataItem.Total));
+				oPoint.setSelected = false;
+				oPoint.setColor("Neutral");
 
+				oChartID.addPoint(oPoint);
+
+			}
 		},
 
 		_parseValue: function(sInformedValue) {
-			
-			debugger;
 
 			return parseFloat(sInformedValue);
 

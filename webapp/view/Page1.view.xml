@@ -106,7 +106,11 @@
                                         <items>
                                             <microchart:InteractiveBarChart  displayedBars="5" labelWidth="40%" bars="{path:'/CustomerSalesSet', templateShareable:true}" selectionChanged="onBarClick">
                                                 <microchart:bars>
-                                                    <microchart:InteractiveBarChartBar  color="Neutral" displayedValue="{Total}" label="{CustomerName}" value="{parts: ['Total'], formatter: '.convertToFloat'}" />
+                                                    <microchart:InteractiveBarChartBar  color="Neutral" displayedValue="{Total}" label="{CustomerName}" value="{parts: ['Total'], formatter: '.convertToFloat'}">
+                                                        <microchart:customData>
+                                                            <core:CustomData key="CustomerID" value="{CustomerID}" />
+                                                        </microchart:customData>
+                                                    </microchart:InteractiveBarChartBar>
                                                 </microchart:bars>
                                             </microchart:InteractiveBarChart>
                                         </items>
@@ -117,7 +121,7 @@
                                 <items>
                                     <HBox alignItems="Center" justifyContent="SpaceBetween" alignContent="Stretch" width="20rem" class="sapUiSmallMargin">
                                         <items>
-                                            <Label text="Revenue by Year | M USD" required="false"/>
+                                            <Label text="Histórico Cliente: " required="false"/>
                                             <Button icon="sap-icon://value-help" type="Transparent"/>
                                         </items>
                                     </HBox>
