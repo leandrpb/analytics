@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/sap/build/standard/salesOrderAnalysis/model/models"
-], function(UIComponent, Device, models) {
+	"com/sap/build/standard/salesOrderAnalysis/model/models",
+	"sap/ui/model/json/JSONModel",
+], function(UIComponent, Device, models, JSONModel) {
 	"use strict";
 
 	var navigationWithContext = {
@@ -38,6 +39,11 @@ sap.ui.define([
 			this.setModel(models.createDeviceModel(), "device");
 			// set the FLP model
 			this.setModel(models.createFLPModel(), "FLP");
+
+			// Cria Modo para labels
+			let oJModel = new JSONModel();
+			oJModel.setProperty("/historico", "Histórico Comprador: ");
+			this.setModel(oJModel, "labels");
 
 			// set the dataSource model
 			this.setModel(new sap.ui.model.json.JSONModel({

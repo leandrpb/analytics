@@ -121,7 +121,7 @@
                                 <items>
                                     <HBox alignItems="Center" justifyContent="SpaceBetween" alignContent="Stretch" width="20rem" class="sapUiSmallMargin">
                                         <items>
-                                            <Label text="Histórico Cliente: " required="false"/>
+                                            <Label text="{labels>/historico}" required="false"/>
                                             <Button icon="sap-icon://value-help" type="Transparent"/>
                                         </items>
                                     </HBox>

@@ -21,6 +21,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 	return Controller.extend("com.sap.build.standard.salesOrderAnalysis.controller.Page1", {
 
+		onInit: function() {
+			this.getView().byId("ChartID").removeAllPoints();
+		},
 		handleRouteMatched: function(oEvent) {
 			var sAppId = "App64b04da02b8b63015356ca4e";
 
@@ -58,9 +61,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 
-		onInit: function() {
-			this.getView().byId("ChartID").removeAllPoints();
-		},
+
 
 		onBarClick: function(oControlEvent)
 		{
@@ -68,6 +69,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			// Get CustomData from Clicked Bar
 			let sCustomerIDClicked = oControlEvent.getParameters().bar.getCustomData()[0].getValue();
 			oControlEvent.getParameters().bar.setProperty("selected", false);
+
+			// Set Label for Graphic
+			let sLabel = "Histórico Comprador: " + oControlEvent.getParameters().bar.getProperty("label");
+			let oLabelModel = this.getOwnerComponent().getModel("labels");
+			oLabelModel.setProperty("/historico", sLabel);
             
 			// Get Model
             let oModel = this.getOwnerComponent().getModel();
