@@ -127,7 +127,7 @@
                                     </HBox>
                                     <FlexBox width="20rem" height="13rem" alignItems="Center" class="sapUiSmallMargin">
                                         <items>
-                                            <microchart:InteractiveLineChart id="ChartID" displayedPoints="6" points="/CustomerSalesYearsSet">
+                                            <microchart:InteractiveLineChart id="ChartID" displayedPoints="6" points="/CustomerSalesYearsSet" selectionChanged="onLineChartClicked">
                                                 <microchart:points>
                                                     <microchart:InteractiveLineChartPoint color="Neutral" label="{Year}" value="{parts: ['Total'], formatter: '.convertToFloat'}" selected="false"/>
                                                 </microchart:points>
@@ -140,17 +140,15 @@
                                 <items>
                                     <HBox alignItems="Center" justifyContent="SpaceBetween" alignContent="Stretch" width="20rem" class="sapUiSmallMargin">
                                         <items>
-                                            <Label text="Revenue by Main Category | K USD" required="false"/>
+                                            <Label text="{labels>/material}" required="false"/>
                                             <Button icon="sap-icon://slim-arrow-down" type="Transparent" press="_onFioriAnalyticalListPageVisualFilterItemDonutChartPress"/>
                                         </items>
                                     </HBox>
                                     <FlexBox width="20rem" height="13rem" alignItems="Center" class="sapUiSmallMargin">
                                         <items>
-                                            <microchart:InteractiveDonutChart displayedSegments="3">
+                                            <microchart:InteractiveDonutChart id="DonutBar" displayedSegments="4" segments="/CustomerSalesMaterialSet">
                                                 <microchart:segments>
-                                                    <microchart:InteractiveDonutChartSegment color="Neutral" label="Computer Systems" value="10.5" selected="false"/>
-                                                    <microchart:InteractiveDonutChartSegment color="Neutral" label="Computer Components" value="1.5" selected="false"/>
-                                                    <microchart:InteractiveDonutChartSegment color="Neutral" label="Other" value="1.9" selected="false"/>
+                                                    <microchart:InteractiveDonutChartSegment color="Neutral" label="{MaterialDesciription}" value="{parts: ['Total'], formatter: '.convertToFloat'}" selected="false"/>
                                                 </microchart:segments>
                                             </microchart:InteractiveDonutChart>
                                         </items>

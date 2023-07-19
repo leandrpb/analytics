@@ -5,7 +5,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"./utilities",
 	"sap/ui/core/routing/History",
 	"sap/ui/model/Filter",
-    "sap/suite/ui/microchart/InteractiveLineChartPoint"
+    "sap/suite/ui/microchart/InteractiveLineChartPoint",
+	"sap/ui/core/CustomData",
+	"sap/suite/ui/microchart/InteractiveDonutChartSegment"
 ], function(Controller,
 	JSONModel,
 	MessageBox,
@@ -16,7 +18,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	utilities,
 	History,
 	Filter,
-	InteractiveLineChartPoint) {
+	InteractiveLineChartPoint,
+	CustomData,
+	InteractiveDonutChartSegment) {
 	"use strict";
 
 	return Controller.extend("com.sap.build.standard.salesOrderAnalysis.controller.Page1", {
@@ -74,7 +78,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			let sLabel = "Histórico Comprador: " + oControlEvent.getParameters().bar.getProperty("label");
 			let oLabelModel = this.getOwnerComponent().getModel("labels");
 			oLabelModel.setProperty("/historico", sLabel);
-            
+			oLabelModel.setProperty("/material", "Materiais mais comprados: ")
+             
 			// Get Model
             let oModel = this.getOwnerComponent().getModel();
 
@@ -96,6 +101,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			let oChartID = this.getView().byId("ChartID");
 			oChartID.removeAllPoints();
 
+			let oDonutChart = this.getView().byId("DonutBar");
+			oDonutChart.removeAllSegments();
+
 			var index;
 			var total = oData.results.length;
 
@@ -109,12 +117,85 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				oPoint.setValue(this._parseValue(oDataItem.Total));
 				oPoint.setSelected = false;
 				oPoint.setColor("Neutral");
+                
+				// Store CustomerID
+                let oCustomData = new CustomData();
+				oCustomData.setKey("CustomerID");
+				oCustomData.setValue(oDataItem.CustomerID);
+				oPoint.insertCustomData(oCustomData, 0)
 
+				// Store Year
+				oCustomData = new CustomData();
+				oCustomData.setKey("Year");
+				oCustomData.setValue(oDataItem.Year);
+				oPoint.insertCustomData(oCustomData, 1)
+
+			    // Store Year
+				oCustomData = new CustomData();
+				oCustomData.setKey("CustomerName");
+				oCustomData.setValue(oDataItem.CustomerName);
+				oPoint.insertCustomData(oCustomData, 2)
 				oChartID.addPoint(oPoint);
 
 			}
 		},
+		onLineChartClicked: function(oEvent) {
 
+			oEvent.getParameters().point.setProperty("selected", false);
+
+			//Get Parameters from CustomData of clicked Point
+			let sCustomerID   = oEvent.getParameters().point.getCustomData()[0].getValue();
+			let sYear         = oEvent.getParameters().point.getCustomData()[1].getValue();
+			let sCustomerName = oEvent.getParameters().point.getCustomData()[2].getValue();
+			
+			// Set Donutbar Label
+			let sDonutLabel = "Materiais mais comprados: " + sCustomerName + '/' + sYear;
+			let oModelLabel = this.getOwnerComponent().getModel("labels");
+			oModelLabel.setProperty("/material", sDonutLabel);
+
+			// Set Filter for Donut Chart
+			let oArrayFilter = new Array();
+           
+			oArrayFilter.push(new Filter("CustomerID", sap.ui.model.FilterOperator.EQ, sCustomerID));
+			oArrayFilter.push(new Filter("AnoVenda", sap.ui.model.FilterOperator.EQ, sYear));
+
+			//Get Entries for Donut Chart
+			let oModel = this.getOwnerComponent().getModel();
+
+			oModel.read("/CustomerSalesMaterialSet", {
+				filters: oArrayFilter,
+				success: (oData) => {
+					this._SetDonutSegments(oData);
+				 },
+				error: (oError) => { }
+			})
+		},
+
+		_SetDonutSegments: function(oData) {
+
+			let oDonutChart = this.getView().byId("DonutBar");
+
+			// Clear all segments from Donut Bar
+			oDonutChart.removeAllSegments();
+
+			let iIndex;
+			let iTotal = oData.results.length;
+
+			debugger;
+
+			for (iIndex=0;iIndex<iTotal;iIndex++)
+			{
+				// Add Segments to Donut Chart Bar
+				let oDonutElement = new InteractiveDonutChartSegment();
+
+				oDonutElement.setColor("Neutral");
+				oDonutElement.setLabel(oData.results[iIndex].MaterialDescription);
+				oDonutElement.setValue(this._parseValue(oData.results[iIndex].Total));
+
+				oDonutChart.addSegment(oDonutElement);
+			}
+
+		},
 		_parseValue: function(sInformedValue) {
 
 			return parseFloat(sInformedValue);

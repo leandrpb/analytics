@@ -43,6 +43,7 @@ sap.ui.define([
 			// Cria Modo para labels
 			let oJModel = new JSONModel();
 			oJModel.setProperty("/historico", "Histórico Comprador: ");
+			oJModel.setProperty("/material", "Materiais mais comprados: ")
 			this.setModel(oJModel, "labels");
 
 			// set the dataSource model
