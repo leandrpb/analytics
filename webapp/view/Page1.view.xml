@@ -146,7 +146,7 @@
                                     </HBox>
                                     <FlexBox width="20rem" height="13rem" alignItems="Center" class="sapUiSmallMargin">
                                         <items>
-                                            <microchart:InteractiveDonutChart id="DonutBar" displayedSegments="4" segments="/CustomerSalesMaterialSet">
+                                            <microchart:InteractiveDonutChart id="DonutBar" displayedSegments="4" segments="/CustomerSalesMaterialSet" selectionChanged="onDonutClicked">
                                                 <microchart:segments>
                                                     <microchart:InteractiveDonutChartSegment color="Neutral" label="{MaterialDesciription}" value="{parts: ['Total'], formatter: '.convertToFloat'}" selected="false"/>
                                                 </microchart:segments>
@@ -170,66 +170,28 @@
         <f:content>
             <VBox class="sapSmartTemplatesAnalyticalListPageInheritHeight sapSmartTemplatesAnalyticalListPageMasterExtension">
                 <items>
-                    <OverflowToolbar style="Clear" class="sapSmartTemplatesAnalyticalListPageFilterableKPIContainer">
-                        <content>
-                            <Title text="Project Costs" class="sapSmartTemplatesAnalyticalListPageFilterableKPITitle"/>
-                            <HBox>
-                                <items/>
-                            </HBox>
-                            <ToolbarSpacer/>
-                            <SegmentedButton selectedKey="{alpModel>/contentView}" width="inherit" visible="true" selectionChange="_onFioriAnalyticalListPageContentActionsSelectionChange">
-                                <items>
-                                    <SegmentedButtonItem tooltip="Chart and Table View" key="charttable" icon="sap-icon://chart-table-view" press="_onFioriAnalyticalListPageContentActionsPress"/>
-                                    <SegmentedButtonItem tooltip="Chart View" key="chart" icon="sap-icon://vertical-bar-chart-2" press="_onFioriAnalyticalListPageContentActionsPress1"/>
-                                    <SegmentedButtonItem tooltip="Table View" key="table" icon="sap-icon://table-view" press="_onFioriAnalyticalListPageContentActionsPress2"/>
-                                </items>
-                                <layoutData>
-                                    <OverflowToolbarLayoutData priority="NeverOverflow"/>
-                                </layoutData>
-                            </SegmentedButton>
-                        </content>
-                    </OverflowToolbar>
                     <VBox fitContainer="true">
                         <items>
                             <VBox visible="{= (${alpModel>/contentView} === 'table' || ${alpModel>/contentView} === 'charttable') }" class="sapSmartTemplatesAnalyticalListPageTableContainer">
                                 <items>
-                                    <Table width="1172.3125px" noDataText="No data" showSeparators="All" growing="true" growingScrollToLoad="true" growingThreshold="20" mode="MultiSelect" class="sapUiCompSmartTable" items="">
+                                    <Table id="OVTable" width="1172.3125px" noDataText="No data" showSeparators="All" growing="true" growingScrollToLoad="false" growingThreshold="5" mode="MultiSelect" class="sapUiCompSmartTable" items="/CustomerSalesOVSet">
                                         <headerToolbar>
                                             <OverflowToolbar design="Transparent" class="sapUiCompSmartTableToolbar" style="Clear">
                                                 <content>
-                                                    <Title textAlign="Begin" text="Sales Order Items (4)"/>
+                                                    <Title textAlign="Begin" text="{labels>/ordem}"/>
                                                     <ToolbarSpacer/>
-                                                    <SegmentedButton>
-                                                        <items>
-                                                            <SegmentedButtonItem icon="sap-icon://show"/>
-                                                            <SegmentedButtonItem icon="sap-icon://hide"/>
-                                                        </items>
-                                                    </SegmentedButton>
-                                                    <OverflowToolbarButton text="Sort" type="Transparent" icon="sap-icon://action-settings" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                                     <OverflowToolbarButton type="Transparent" text="Filter" icon="{path: 'alpModel>/exitFullscreenTable', formatter: '.formatFullscreenIconAnalyticalControl'}" iconFirst="true" width="auto" press="_onFioriAnalyticalListPageTablePress"/>
                                                 </content>
                                             </OverflowToolbar>
                                         </headerToolbar>
                                         <columns>
-                                            <Column width="60px" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                                 <header>
-                                                    <Text text="Year" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Text text="Ordem de Venda" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 </header>
                                                 <footer/>
                                             </Column>
-                                            <Column width="60px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                                <header>
-                                                    <Text text="Month" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                </header>
-                                                <footer/>
-                                            </Column>
-                                            <Column width="90px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                                <header>
-                                                    <Text text="Sale Order" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                </header>
-                                                <footer/>
-                                            </Column>
-                                            <Column width="40px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                                 <header>
                                                     <Text text="Item" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 </header>
@@ -237,31 +199,19 @@
                                             </Column>
                                             <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                                 <header>
-                                                    <Text text="Product" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Text text="Tipo" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 </header>
                                                 <footer/>
                                             </Column>
                                             <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                                 <header>
-                                                    <Text text="Main Category" width="93.25px" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Text text="Quantidade" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 </header>
                                                 <footer/>
                                             </Column>
                                             <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                                 <header>
-                                                    <Text text="Customer" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                </header>
-                                                <footer/>
-                                            </Column>
-                                            <Column width="70px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                                <header>
-                                                    <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                </header>
-                                                <footer/>
-                                            </Column>
-                                            <Column width="100px" hAlign="Right" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                                <header>
-                                                    <Text text="Revenue" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Text text="Total" width="93.25px" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 </header>
                                                 <footer/>
                                             </Column>
@@ -269,15 +219,11 @@
                                         <items>
                                             <ColumnListItem type="Active">
                                                 <cells>
-                                                    <Text text="{SalesOrder/Year}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                    <Text text="{SalesOrder/Month}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                    <Link text="{SalesOrder/ID}" textAlign="Begin" width="auto" target="_blank" wrapping="false" enabled="true" visible="true" emphasized="false" subtle="false" press="_onLinkPress"/>
-                                                    <Text text="{ItemNum}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                    <Link text="{Product/NameWithCode}" textAlign="Begin" width="180px" target="_blank" wrapping="false" enabled="true" visible="true" emphasized="false" subtle="false" press="_onLinkPress1"/>
-                                                    <Text text="{Product/MainCategory}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                                    <Text text="{Customer/Name}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Text text="{SalesOrder}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Text text="{SalesItem}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Text text="{Tipo}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                     <ObjectNumber number="{path: 'Quantity', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="{QuantityUnit}" emphasized="true" state="None"/>
-                                                    <ObjectNumber number="{path: 'UnitPrice', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="{Currency}" emphasized="true" state="None"/>
+                                                    <ObjectNumber number="{path: 'Total', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="{Currency}" emphasized="true" state="None"/>                                                    
                                                 </cells>
                                             </ColumnListItem>
                                         </items>

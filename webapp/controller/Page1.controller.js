@@ -7,7 +7,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"sap/ui/model/Filter",
     "sap/suite/ui/microchart/InteractiveLineChartPoint",
 	"sap/ui/core/CustomData",
-	"sap/suite/ui/microchart/InteractiveDonutChartSegment"
+	"sap/suite/ui/microchart/InteractiveDonutChartSegment",
+	"sap/m/ColumnListItem",
+	"sap/ui/base/ManagedObject",
+	"sap/m/Text",
+	"sap/m/ObjectNumber",
+	"../model/formatter",
+	"sap/ui/core/format/NumberFormat"
 ], function(Controller,
 	JSONModel,
 	MessageBox,
@@ -20,11 +26,18 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	Filter,
 	InteractiveLineChartPoint,
 	CustomData,
-	InteractiveDonutChartSegment) {
+	InteractiveDonutChartSegment,
+	ColumnListItem,
+	ManagedObject,
+	Text,
+	ObjectNumber,
+	formatter,
+	NumberFormat) {
 	"use strict";
 
 	return Controller.extend("com.sap.build.standard.salesOrderAnalysis.controller.Page1", {
 
+		formatter: formatter,
 		onInit: function() {
 			this.getView().byId("ChartID").removeAllPoints();
 		},
@@ -78,7 +91,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			let sLabel = "Histórico Comprador: " + oControlEvent.getParameters().bar.getProperty("label");
 			let oLabelModel = this.getOwnerComponent().getModel("labels");
 			oLabelModel.setProperty("/historico", sLabel);
-			oLabelModel.setProperty("/material", "Materiais mais comprados: ")
+			oLabelModel.setProperty("/material", "Materiais mais comprados: ");
+			oLabelModel.setProperty("/ordem", "Ordens de Venda para Material: ");
              
 			// Get Model
             let oModel = this.getOwnerComponent().getModel();
@@ -103,6 +117,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			let oDonutChart = this.getView().byId("DonutBar");
 			oDonutChart.removeAllSegments();
+
+			let oOVTable = this.getView().byId("OVTable");
+			oOVTable.removeAllItems();
 
 			var index;
 			var total = oData.results.length;
@@ -130,11 +147,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				oCustomData.setValue(oDataItem.Year);
 				oPoint.insertCustomData(oCustomData, 1)
 
-			    // Store Year
+			    // Store CustomerName
 				oCustomData = new CustomData();
 				oCustomData.setKey("CustomerName");
 				oCustomData.setValue(oDataItem.CustomerName);
-				oPoint.insertCustomData(oCustomData, 2)
+				oPoint.insertCustomData(oCustomData, 2);
 				oChartID.addPoint(oPoint);
 
 			}
@@ -142,6 +159,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		onLineChartClicked: function(oEvent) {
 
 			oEvent.getParameters().point.setProperty("selected", false);
+
+			let oOVTable = this.getView().byId("OVTable");
+			oOVTable.removeAllItems();
 
 			//Get Parameters from CustomData of clicked Point
 			let sCustomerID   = oEvent.getParameters().point.getCustomData()[0].getValue();
@@ -152,6 +172,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			let sDonutLabel = "Materiais mais comprados: " + sCustomerName + '/' + sYear;
 			let oModelLabel = this.getOwnerComponent().getModel("labels");
 			oModelLabel.setProperty("/material", sDonutLabel);
+			oModelLabel.setProperty("/ordem", "Ordens de Venda para Material: ");
 
 			// Set Filter for Donut Chart
 			let oArrayFilter = new Array();
@@ -162,26 +183,25 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			//Get Entries for Donut Chart
 			let oModel = this.getOwnerComponent().getModel();
 
+			
 			oModel.read("/CustomerSalesMaterialSet", {
 				filters: oArrayFilter,
 				success: (oData) => {
 					this._SetDonutSegments(oData);
 				 },
 				error: (oError) => { }
-			})
+			}) 
 		},
 
 		_SetDonutSegments: function(oData) {
 
-			let oDonutChart = this.getView().byId("DonutBar");
+			let oDonutChart = this.getView().byId("DonutBar");		
 
 			// Clear all segments from Donut Bar
 			oDonutChart.removeAllSegments();
 
 			let iIndex;
 			let iTotal = oData.results.length;
-
-			debugger;
 
 			for (iIndex=0;iIndex<iTotal;iIndex++)
 			{
@@ -191,9 +211,83 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				oDonutElement.setColor("Neutral");
 				oDonutElement.setLabel(oData.results[iIndex].MaterialDescription);
 				oDonutElement.setValue(this._parseValue(oData.results[iIndex].Total));
+				//let oCurrencyFormat = NumberFormat.getCurrencyInstance();
+				//oDonutElement.setValue(oCurrencyFormat.parse(oData.results[iIndex].Total));
 
+				let oDataItem = oData.results[iIndex];
+
+				// Store CustomerID
+                let oCustomData = new CustomData();
+				oCustomData.setKey("CustomerID");
+				oCustomData.setValue(oDataItem.CustomerID);
+				oDonutElement.insertCustomData(oCustomData, 0)
+
+				// Store Year
+				oCustomData = new CustomData();
+				oCustomData.setKey("AnoVenda");
+				oCustomData.setValue(oDataItem.AnoVenda);
+				oDonutElement.insertCustomData(oCustomData, 1)
+
+			    // Store CustomerName
+				oCustomData = new CustomData();
+				oCustomData.setKey("CustomerName");
+				oCustomData.setValue(oDataItem.CustomerName);
+				oDonutElement.insertCustomData(oCustomData, 2);				
+
+			    // Store CustomerName
+				oCustomData = new CustomData();
+				oCustomData.setKey("MaterialID");
+				oCustomData.setValue(oDataItem.MaterialID);
+				oDonutElement.insertCustomData(oCustomData, 3);
+                
 				oDonutChart.addSegment(oDonutElement);
 			}
+
+		},
+
+		onDonutClicked: function(oEvent) {
+
+			let sCustomerID   = oEvent.getParameters().segment.getCustomData()[0].getValue();
+			let sAnoVenda     = oEvent.getParameters().segment.getCustomData()[1].getValue();
+			let sCustomerName = oEvent.getParameters().segment.getCustomData()[2].getValue();
+			let sMaterialID   = oEvent.getParameters().segment.getCustomData()[3].getValue();
+
+			// Set Filter for Donut Chart
+			let oArrayFilter = new Array();
+          
+			oArrayFilter.push(new Filter("CustomerID", sap.ui.model.FilterOperator.EQ, sCustomerID));
+			oArrayFilter.push(new Filter("AnoVenda", sap.ui.model.FilterOperator.EQ, sAnoVenda));
+			oArrayFilter.push(new Filter("MaterialID", sap.ui.model.FilterOperator.EQ, sMaterialID));
+
+			let oModel = this.getOwnerComponent().getModel();
+
+			// Set Label
+			let sOrderLabel = "Ordens de Venda para Material: " + sCustomerName + '/' + sAnoVenda + "/" + sMaterialID;
+			let oModelLabel = this.getOwnerComponent().getModel("labels");
+			oModelLabel.setProperty("/ordem", sOrderLabel);
+			            
+
+			let oOVTable = this.getView().byId("OVTable");
+
+			// Remover todos os items
+			oOVTable.removeAllItems();
+			var oTemplate = new ColumnListItem ( // Celular do Tipo Agregador
+				{ cells: [ new Text({text:"{SalesOrder}", width:"auto", maxLines:1, wrapping:false, textAlign:"Begin", textDirection:"Inherit", visible:true}),
+				           new Text({text:"{SalesItem}", width:"auto", maxLines:1, wrapping:false, textAlign:"Begin", textDirection:"Inherit", visible:true}),
+						   new Text({text:"{Tipo}", width:"auto", maxLines:1, wrapping:false, textAlign:"Begin", textDirection:"Inherit", visible:true}),
+						   new ObjectNumber({number:"{path: 'Quantity', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}", unit: "{UnitMeasure}"}),
+						   new ObjectNumber({number:"{path: 'Total', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}", unit:"{Moeda}"})
+						 ]
+
+				}
+			);
+
+			let oBindingInfo = new ManagedObject();
+			oBindingInfo.path = "/CustomerSalesOVSet";
+			oBindingInfo.template = oTemplate;
+			oBindingInfo.filters  = oArrayFilter;
+            
+			oOVTable.bindItems(oBindingInfo);
 
 		},
 		_parseValue: function(sInformedValue) {
