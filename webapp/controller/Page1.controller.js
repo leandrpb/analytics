@@ -35,7 +35,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		formatter: formatter,
 		handleRouteMatched: function(oEvent) {
 			var sAppId = "App64b04da02b8b63015356ca4e";
-			debugger;
 
 			var oParams = {};
 
