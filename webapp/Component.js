@@ -6,23 +6,6 @@ sap.ui.define([
 ], function(UIComponent, Device, models, JSONModel) {
 	"use strict";
 
-	var navigationWithContext = {
-		"SalesOrderSet": {
-			"Popover5": "SalesOrderItem",
-			"Popover6": "Customer",
-			"Popover4": ""
-		},
-		"SalesOrderItemSet": {
-			"Popover5": "",
-			"Popover6": "Customer",
-			"Popover4": "SalesOrder"
-		},
-		"CustomerSet": {
-			"Popover6": "",
-			"Popover4": "SalesOrder"
-		}
-	};
-
 	return UIComponent.extend("com.sap.build.standard.salesOrderAnalysis.Component", {
 
 		metadata: {
@@ -74,13 +57,7 @@ sap.ui.define([
 			}
 
 			return app;
-		},
-
-		getNavigationPropertyForNavigationWithContext: function(sEntityNameSet, targetPageName) {
-			var entityNavigations = navigationWithContext[sEntityNameSet];
-			return entityNavigations == null ? null : entityNavigations[targetPageName];
 		}
-
 	});
 
 });
