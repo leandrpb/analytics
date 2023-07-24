@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "2.6"
+metadata:
+  name: com.sap.build.standard.salesOrderAnalysis
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: https://vm63.4hub.cloud:44363
+          client: "140"
+        app:
+          name: ZANALYTIC_LPB
+          description: Analytic Fiori
+          package: ZLPB
+          transport: S4HK902327
+        exclude:
+          - /test/
